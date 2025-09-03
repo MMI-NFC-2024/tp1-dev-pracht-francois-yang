@@ -3,9 +3,12 @@ import PlotFigure from '../components/PlotFigure.astro';
 import Layout from '../layouts/Layout.astro';
 import * as Plot from "@observablehq/plot";
 import penguins from "../assets/penguins.json";
+import cars from "../assets/cars.json";
 ---
 
 <Layout>
+	<h1>Graphiques des données</h1>
+	<h2>Données de pinguins</h2>
 	<PlotFigure options={
 		{
 			marks: [
@@ -21,6 +24,21 @@ import penguins from "../assets/penguins.json";
 			],
 			x: { label: "Culmen Length (mm)" },
 			y: { label: "Culmen Depth (mm)" },
+			width: 600,
+			height: 400
+		}
+	} />
+	<h2>Données de puissance des voitures</h2>
+	<PlotFigure options={
+		{
+			marks: [
+		       Plot.lineY(
+			       [...cars].sort((a, b) => a.year - b.year),
+			       { x: "year", y: "power (hp)", reduce: "mean", stroke: "steelblue" }
+		       )
+			],
+			x: { label: "Year" },
+			y: { label: "Power HP" },
 			width: 600,
 			height: 400
 		}
