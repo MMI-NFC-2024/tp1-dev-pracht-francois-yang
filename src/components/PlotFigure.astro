@@ -1,0 +1,14 @@
+---
+import * as Plot from "@observablehq/plot";
+import { JSDOM } from "jsdom";
+const { options } = Astro.props;
+
+let plotHtml = "";
+if (options) {
+	const plot = Plot.plot({ ...options, document: new JSDOM("").window.document });
+	plotHtml = plot.outerHTML;
+}
+---
+<div>
+	<div set:html={plotHtml}></div>
+</div>
